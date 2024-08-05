@@ -4,7 +4,7 @@ import CharactersMenu from "@/components/CharactersMenu.vue";
 </script>
 
 <template>
-  <CharactersMenu/>
+
   <RouterView />
 </template>
 

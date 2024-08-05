@@ -1,40 +1,22 @@
 <script lang="ts">
 import {getCharacters} from "@/APIs/characters";
-import TheCharacter from "@/components/TheCharacter.vue";
+import TheCharacter from "@/components/CharacterCard.vue";
 
 export default {
   data() {
     return {
       MAX_COUNT: 0,
-      characters: [],
-      test1: {
-      "id": 1,
-      "name": "Rick Sanchez",
-      "status": "Alive",
-      "species": "Human",
-      "type": "",
-      "gender": "Male",
-      "origin": {
-        "name": "Earth",
-        "url": "https://rickandmortyapi.com/api/location/1"
-      },
-      "location": {
-        "name": "Earth",
-        "url": "https://rickandmortyapi.com/api/location/20"
-      },
-      "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      "episode": [
-        "https://rickandmortyapi.com/api/episode/1",
-        "https://rickandmortyapi.com/api/episode/2",
-        // ...
-      ],
-      "url": "https://rickandmortyapi.com/api/character/1",
-      "created": "2017-11-04T18:48:46.250Z"
+      characters: []
     }
+  },
+  props: {
+    page: {
+      type: null,
+      required: false
     }
   },
   async mounted() {
-    const charactersData = await getCharacters()
+    const charactersData = await getCharacters(this.page)
     this.MAX_COUNT = charactersData.info.count;
     this.characters = charactersData.results;
   },
@@ -45,10 +27,21 @@ export default {
 </script>
 
 <template>
-  <TheCharacter v-for="character in characters" :key="character.id" :character="character">
-  </TheCharacter>
+  <div class="wrapper">
+    <TheCharacter v-for="character in characters" :key="character.id"
+                  :character="character">
+    </TheCharacter>
+  </div>
 </template>
 
 <style scoped>
-
+  .wrapper {
+    display: grid;
+    padding: 2rem 0;
+    grid-template-columns: repeat(auto-fit, 200px);
+    gap: 5px;
+    justify-content: center;
+    justify-items: center;
+    background: var(--color-background-soft);
+  }
 </style>
