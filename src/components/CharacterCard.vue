@@ -26,8 +26,8 @@ export default {
 
 <template>
   <div class="card-wrapper">
-    <RouterLink :to="`/character/${character.id}`">
       <div class="card">
+        <RouterLink :to="`/character/${character.id}`">
         <img :src="character.image" alt="NOT FOUND">
         <div class="description">
           <div>{{ character.name }}</div>
@@ -37,8 +37,8 @@ export default {
           <div>{{ character.gender }}</div>
           <div>{{ character.origin.name }}</div>
         </div>
+        </RouterLink>
       </div>
-    </RouterLink>
   </div>
 </template>
 

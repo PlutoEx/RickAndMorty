@@ -14,7 +14,6 @@ export function getCharacters(page: number = 1) {
 export function getCharacter(id: number) {
   return axios.get(base_url + `/character/${id}`)
     .then((response) => {
-      console.log(response)
       return response.data;
     })
     .catch((error) => {
