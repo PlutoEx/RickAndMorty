@@ -1,12 +1,11 @@
 <script lang="ts">
 import {getCharacters} from "@/APIs/characters";
-import TheCharacter from "@/components/CharacterCard.vue";
+import TheCharacter from "@/components/characters/CharacterCard.vue";
 import PageNav from "@/components/PageNav.vue";
 
 export default {
   data() {
     return {
-      MAX_COUNT: 0,
       characters: []
     }
   },
@@ -19,7 +18,6 @@ export default {
   },
   async mounted() {
     const charactersData = await getCharacters(this.page)
-    this.MAX_COUNT = charactersData.info.count;
     this.characters = charactersData.results;
   },
   components: {
@@ -29,7 +27,6 @@ export default {
   watch: {
     async page() {
       const charactersData = await getCharacters(this.page)
-      this.MAX_COUNT = charactersData.info.count;
       this.characters = charactersData.results;
     }
   }
@@ -43,7 +40,7 @@ export default {
                   :character="character">
     </TheCharacter>
     </div>
-    <PageNav :page="parseInt(page)"/>
+    <PageNav :page="parseInt(page)" path="/"/>
   </div>
 </template>
 
